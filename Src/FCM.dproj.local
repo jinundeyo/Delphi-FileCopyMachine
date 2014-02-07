@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.296,=C:\Documents and Settings\jinwoo\My Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.593,=C:\Documents and Settings\jinwoo\My Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.484,D:\Delphi\App\파일복사기\Src\Unit1.dfm=D:\Delphi\App\파일복사기\Src\FormMain.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.140,D:\Delphi\App\파일복사기\Src\jw_filecopy.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.421,=C:\Documents and Settings\jinwoo\My Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.078,D:\Delphi\Test\파일복사_CopyFile\Project1.dproj=C:\Documents and Settings\jinwoo\My Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.843,=C:\Documents and Settings\jinwoo\My Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.890,=C:\Documents and Settings\jinwoo\My Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.984,=D:\Delphi\App\파일복사기\Src\Unit2.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.796,D:\Delphi\App\파일복사기\Src\Unit2.pas=D:\Delphi\App\파일복사기\Src\jw_filecopy.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.843,D:\Delphi\Test\파일복사_CopyFile\Unit1.dfm=C:\Documents and Settings\jinwoo\My Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.296,D:\Delphi\App\파일복사기\Src\FCM.dproj=D:\Delphi\App\파일복사기\Src\Project1.dproj</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.078,D:\Delphi\App\파일복사기\Src\Unit1.pas=D:\Delphi\App\파일복사기\Src\jw_filecopy.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.843,D:\Delphi\Test\파일복사_CopyFile\Unit1.pas=C:\Documents and Settings\jinwoo\My Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.484,D:\Delphi\App\파일복사기\Src\Unit1.pas=D:\Delphi\App\파일복사기\Src\FormMain.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.468,=D:\Delphi\App\파일복사기\Src\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
