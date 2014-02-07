@@ -1,0 +1,215 @@
+unit FormMain;
+
+interface
+
+uses
+  jw_filecopy,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, JvDriveCtrls, JvListBox, Vcl.ExtCtrls, Vcl.FileCtrl, JvExControls, JvSpeedButton;
+
+const
+  APP_NAME = '파일복사기';
+
+type
+  T_FormMain = class(TForm)
+    Panel1: TPanel;
+    Memo1: TMemo;
+    Panel2: TPanel;
+    JvDirectoryListBox1: TJvDirectoryListBox;
+    JvDriveCombo1: TJvDriveCombo;
+    Button1: TButton;
+    a: TLabel;
+    JvDirectoryListBox2: TJvDirectoryListBox;
+    JvDriveCombo2: TJvDriveCombo;
+    Label1: TLabel;
+    JvFileListBox1: TJvFileListBox;
+    CheckBox1: TCheckBox;
+    btnCopy: TButton;
+    JvSpeedButton1: TJvSpeedButton;
+    procedure Button1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnCopyClick(Sender: TObject);
+    procedure JvSpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+//    FFileCopyThread: TJW_filecopy;
+
+    procedure CopyFilesThread;
+      procedure CopyOneFileThread(fn_src: string; dn_dest: string);
+
+    procedure CopyFiles;
+      procedure CopyOneFile(fn_src: string; dn_dest: string);
+
+    procedure addlog(msg: string);
+  public
+    { Public declarations }
+  end;
+
+var
+  _FormMain: T_FormMain;
+
+implementation
+
+{$R *.dfm}
+
+procedure T_FormMain.addlog(msg: string);
+begin
+  memo1.Lines.Add(msg);
+end;
+
+procedure T_FormMain.btnCopyClick(Sender: TObject);
+begin
+  CopyFilesThread();
+end;
+
+procedure T_FormMain.Button1Click(Sender: TObject);
+begin
+  CopyFiles();
+end;
+
+procedure T_FormMain.CopyFiles;
+var
+  I: Integer;
+  dn_src, dn_dest: string;
+  fn_src: string;
+label
+  goto_copyfiles_end;
+begin
+  dn_src := JvDirectoryListBox1.Directory;
+  dn_dest := JvDirectoryListBox2.Directory;
+
+  if dn_src = dn_dest then begin
+    Application.MessageBox('복사하려는 폴더 위치가 같음.'+#13#10+'목적지 폴더 위치 바꿔줘용~', APP_NAME, MB_OK + MB_ICONWARNING);
+    goto goto_copyfiles_end;
+  end;
+
+  if not CheckBox1.Checked then begin // 선택한 파일만 복사
+    if JvFileListBox1.SelCount = 0 then begin // 선택한게 없음
+      Application.MessageBox('복사하려는 파일을 선택해 보아요~', APP_NAME, MB_OK + MB_ICONWARNING);
+      goto goto_copyfiles_end;
+    end;
+  end;
+
+  if JvFileListBox1.Count = 0 then begin // 폴더에 파일이 하나도 없음
+    addlog('복사할 파일이 없넹');
+    goto goto_copyfiles_end;
+  end;
+
+  addlog('=== 파일 복사 시작 ===');
+
+  for I := 0 to JvFileListBox1.Items.Count - 1 do begin
+    fn_src := dn_src + '\' + JvFileListBox1.Items.Strings[i];
+
+    if not CheckBox1.Checked then begin // 선택한 파일만 복사
+      if JvFileListBox1.Selected[i] then begin // 선택 했나?
+        CopyOneFile(fn_src, dn_dest);
+      end
+      else begin
+        // skip : 선택한파일만 복사하는 옵션 + 선택 안함.
+      end;
+    end
+    else begin // 모두 복사
+      CopyOneFile(fn_src, dn_dest);
+    end;
+  end;
+
+  addlog('=== 파일 복사 끝 ===');
+
+goto_copyfiles_end:
+  // do nothing
+end;
+
+procedure T_FormMain.CopyFilesThread;
+var
+  I: Integer;
+  dn_src, dn_dest: string;
+  fn_src: string;
+label
+  goto_copyfiles_end;
+begin
+  dn_src := JvDirectoryListBox1.Directory;
+  dn_dest := JvDirectoryListBox2.Directory;
+
+  if dn_src = dn_dest then begin
+    Application.MessageBox('복사하려는 폴더 위치가 같음.'+#13#10+'목적지 폴더 위치 바꿔줘용~', APP_NAME, MB_OK + MB_ICONWARNING);
+    goto goto_copyfiles_end;
+  end;
+
+  if not CheckBox1.Checked then begin // 선택한 파일만 복사
+    if JvFileListBox1.SelCount = 0 then begin // 선택한게 없음
+      Application.MessageBox('복사하려는 파일을 선택해 보아요~', APP_NAME, MB_OK + MB_ICONWARNING);
+      goto goto_copyfiles_end;
+    end;
+  end;
+
+  if JvFileListBox1.Count = 0 then begin // 폴더에 파일이 하나도 없음
+    addlog('복사할 파일이 없넹');
+    goto goto_copyfiles_end;
+  end;
+
+  addlog('=== 파일 복사 시작 ===');
+
+  //for I := 0 to JvFileListBox1.Items.Count - 1 do begin
+  for I := 0 to 0 do begin
+    fn_src := dn_src + '\' + JvFileListBox1.Items.Strings[i];
+
+    if not CheckBox1.Checked then begin // 선택한 파일만 복사
+      if JvFileListBox1.Selected[i] then begin // 선택 했나?
+        CopyOneFileThread(fn_src, dn_dest);
+      end
+      else begin
+        // skip : 선택한파일만 복사하는 옵션 + 선택 안함.
+      end;
+    end
+    else begin // 모두 복사
+      CopyOneFileThread(fn_src, dn_dest);
+    end;
+  end;
+
+  addlog('=== 파일 복사 끝 ===');
+
+goto_copyfiles_end:
+  // do nothing
+end;
+
+procedure T_FormMain.CopyOneFile(fn_src, dn_dest: string);
+var
+  fn_dest: string;
+  done: Boolean;
+begin
+  if FileExists(fn_src) then begin
+    fn_dest := dn_dest + '\' + ExtractFileName(fn_src);
+    fn_dest := StringReplace(fn_dest, '\\', '\', [rfReplaceAll]);
+    done := CopyFile(PWideChar(fn_src), PWideChar(fn_dest), False);
+    if done then begin
+      addlog(fn_dest+'...복사 완료');
+    end
+    else begin
+      addlog(fn_dest+'...복사 실패('+IntToStr(GetLastError)+')');
+    end;
+  end
+  else begin
+    addlog('파일이 없슴:'+fn_src);
+  end;
+end;
+
+procedure T_FormMain.CopyOneFileThread(fn_src, dn_dest: string);
+var
+  cft: TJW_filecopy;
+begin
+  cft := TJW_filecopy.Create;
+  cft.SetFileName(fn_src, dn_dest);
+  cft.Resume;
+end;
+
+procedure T_FormMain.FormShow(Sender: TObject);
+begin
+  //JvDriveCombo2.ItemIndex
+end;
+
+procedure T_FormMain.JvSpeedButton1Click(Sender: TObject);
+begin
+  b
+end;
+
+end.

@@ -78,6 +78,19 @@ object _FormMain: T_FormMain
       Height = 13
       Caption = #47785#51201#51648
     end
+    object JvSpeedButton1: TJvSpeedButton
+      Left = 296
+      Top = 6
+      Width = 60
+      Height = 68
+      Caption = #48373#49324#13#10#52712#49548
+      HotTrackFont.Charset = DEFAULT_CHARSET
+      HotTrackFont.Color = clWindowText
+      HotTrackFont.Height = -11
+      HotTrackFont.Name = 'Tahoma'
+      HotTrackFont.Style = []
+      OnClick = JvSpeedButton1Click
+    end
     object JvDirectoryListBox1: TJvDirectoryListBox
       Left = 17
       Top = 34
@@ -103,9 +116,9 @@ object _FormMain: T_FormMain
     end
     object Button1: TButton
       Left = 296
-      Top = 6
+      Top = 80
       Width = 60
-      Height = 155
+      Height = 81
       Caption = #48373#49324
       TabOrder = 2
       OnClick = Button1Click
@@ -137,7 +150,7 @@ object _FormMain: T_FormMain
       Top = 167
       Width = 60
       Height = 42
-      Caption = #48373#49324
+      Caption = #48373#49324#13#10'('#49828#47112#46300')'
       TabOrder = 5
       OnClick = btnCopyClick
     end
